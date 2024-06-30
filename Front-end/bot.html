@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <title>Chat Interface</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
   <div class="sidebar" id="sidebar">
     <button class="toggle-btn" id="toggle-btn"><span class="material-symbols-rounded" style="font-size: 45px;">search_hands_free</span></button>
-    <button class="t1" id="t1"></button>
-    
+    <button class="t1" id="t1"><span class="material-symbols-rounded" style="font-size: 40px;">add</span>
+      <span class="button-text">New Chat</span></button>
   </div>
 
   <div class="main-content">
     <button class="mode-toggle" id="mode-toggle">🌙</button>
     <div class="chat-section">
-      <div class="messages">
+      <div class="messages" id="messages">
         <!-- Chat messages will go here -->
       </div>
       <div class="message-input">
