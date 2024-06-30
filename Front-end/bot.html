@@ -21,10 +21,12 @@
         <!-- Chat messages will go here -->
       </div>
       <div class="message-input">
+        <div id="image-preview" class="image-preview"></div>
+        <input type="file" id="image-input" accept="image/*" style="display:none;">
         <input type="text" placeholder="Type a message" id="message-box">
-        <button class="send-btn">Send</button>
         <button class="voice-btn" id="voice-btn">🎤</button>
-        <button class="image-btn">📷</button>
+        <label for="image-input" class="image-btn">📷</label>
+        <button class="send-btn">Send</button>
       </div>
     </div>
   </div>

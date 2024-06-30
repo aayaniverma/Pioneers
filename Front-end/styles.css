@@ -132,6 +132,21 @@ body {
   border-radius: 50px; /* Rounded corners for the input field */
 }
 
+.message-input input[type="file"] {
+  display: none;
+}
+
+.message-input .image-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 50%; /* Rounded corners for the buttons */
+  position: relative;
+}
+
 .message-input button {
   background-color: #007bff;
   color: white;
@@ -151,4 +166,29 @@ body {
 
 .material-symbols-rounded {
   color: white;
+}
+
+.image-preview {
+  display: flex;
+  align-items: center;
+  max-width: 100px;
+  max-height: 100px;
+  margin-right: 10px;
+  position: relative;
+}
+
+.image-preview img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.image-preview .remove-image {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
 }

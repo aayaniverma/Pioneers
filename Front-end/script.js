@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const sendBtn = document.querySelector('.send-btn');
   const messagesContainer = document.getElementById('messages');
   const startButton = document.getElementById('voice-btn');
+  const imageInput = document.getElementById('image-input');
+  const imagePreview = document.getElementById('image-preview');
   let recognition;
 
   toggleBtn.addEventListener('click', function () {
@@ -24,13 +26,53 @@ document.addEventListener('DOMContentLoaded', function () {
 
   sendBtn.addEventListener('click', function () {
     const message = messageBox.value.trim();
-    if (message) {
+    const imageFile = imageInput.files[0];
+
+    if (message || imageFile) {
       const messageElement = document.createElement('div');
-      messageElement.textContent = message;
       messageElement.classList.add('message');
+
+      if (message) {
+        const textElement = document.createElement('p');
+        textElement.textContent = message;
+        messageElement.appendChild(textElement);
+      }
+
+      if (imageFile) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const imgElement = document.createElement('img');
+          imgElement.src = e.target.result;
+          imgElement.style.maxWidth = '200px';
+          imgElement.style.maxHeight = '200px';
+          messageElement.appendChild(imgElement);
+        };
+        reader.readAsDataURL(imageFile);
+      }
+
       messagesContainer.appendChild(messageElement);
       messageBox.value = '';
+      imageInput.value = ''; // Clear the image input
+      imagePreview.innerHTML = ''; // Clear the image preview
       messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to bottom
+    }
+  });
+
+  imageInput.addEventListener('change', function () {
+    const imageFile = imageInput.files[0];
+    if (imageFile) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        imagePreview.innerHTML = `
+          <img src="${e.target.result}" alt="Image Preview">
+          <button class="remove-image">✖</button>
+        `;
+        document.querySelector('.remove-image').addEventListener('click', function () {
+          imagePreview.innerHTML = '';
+          imageInput.value = '';
+        });
+      };
+      reader.readAsDataURL(imageFile);
     }
   });
 
