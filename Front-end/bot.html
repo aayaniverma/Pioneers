@@ -25,9 +25,25 @@
         <input type="file" id="image-input" accept="image/*" style="display:none;">
         <input type="text" placeholder="Type a message" id="message-box">
         <button class="voice-btn" id="voice-btn">🎤</button>
-        <label for="image-input" class="image-btn">📷</label>
+        <div class="image-dropdown">
+          <button class="image-btn" id="image-btn">📷</button>
+          <div class="image-options" id="image-options">
+            <button id="upload-device">Upload from Device</button>
+            <button id="capture-camera">Capture from Camera</button>
+          </div>
+        </div>
         <button class="send-btn">Send</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Modal for capturing image from camera -->
+  <div id="camera-modal" class="camera-modal">
+    <div class="camera-content">
+      <video id="video" autoplay></video>
+      <button id="snap">Snap</button>
+      <button id="close-camera">Close</button>
+      <canvas id="canvas" style="display:none;"></canvas>
     </div>
   </div>
 
