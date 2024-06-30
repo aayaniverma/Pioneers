@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const messageBox = document.getElementById('message-box');
   const sendBtn = document.querySelector('.send-btn');
   const messagesContainer = document.getElementById('messages');
+  const startButton = document.getElementById('voice-btn');
+  let recognition;
 
   toggleBtn.addEventListener('click', function () {
     sidebar.classList.toggle('expanded');
@@ -31,4 +33,39 @@ document.addEventListener('DOMContentLoaded', function () {
       messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to bottom
     }
   });
+
+  if (!('webkitSpeechRecognition' in window)) {
+    alert('Your browser does not support the Web Speech API');
+  } else {
+    recognition = new webkitSpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    recognition.onstart = function () {
+      startButton.innerText = '🎤';
+    };
+
+    recognition.onresult = function (event) {
+      const transcript = event.results[0][0].transcript;
+      messageBox.value = transcript;
+    };
+
+    recognition.onerror = function (event) {
+      console.error('Speech recognition error:', event.error);
+    };
+
+    recognition.onend = function () {
+      startButton.innerText = '🎤';
+    };
+
+    startButton.onclick = function () {
+      if (recognition.recognizing) {
+        recognition.stop();
+        return;
+      }
+      messageBox.value = '';
+      recognition.start();
+    };
+  }
 });
