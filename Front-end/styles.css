@@ -101,8 +101,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: 0%;
+  height: calc(100% - 120px); /* Adjust height as needed */
   padding: 20px;
+  overflow-y: auto; /* Enable scrolling */
 }
 
 .messages {
@@ -112,16 +113,19 @@ body {
   border: none;
   padding: 10px;
   border-radius: 10px; /* Rounded corners for the messages container */
+  background-color: transparent;
+  
 }
 
 .message-input {
+  flex: 0 0 auto; /* Ensure input box does not shrink */
   display: flex;
   align-items: center;
-  position: relative; /* Relative positioning for input and buttons */
+  position: relative;
   border: 1px solid #ccc;
-  border-radius: 50px; /* Rounded corners for the input container */
-  padding: 5px 10px; /* Padding inside the input container */
-  background-color: #fff; /* Background color for the input container */
+  border-radius: 50px;
+  padding: 5px 10px;
+  background-color: #fff;
 }
 
 .message-input input[type="text"] {
@@ -129,6 +133,7 @@ body {
   padding: 10px;
   border: none;
   outline: none;
+  background-color: transparent;
   border-radius: 50px; /* Rounded corners for the input field */
 }
 
@@ -327,4 +332,9 @@ body {
 
 .image-dropdown:hover .image-options {
   display: block;
+}
+
+.messages img{
+  max-width:200px;
+  max-height:200px;
 }
