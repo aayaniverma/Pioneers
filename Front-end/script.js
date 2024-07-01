@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
     recognition.lang = 'en-US';
 
     recognition.onstart = function () {
-      startButton.innerText = '🎤';
+      startButton.querySelector('.material-symbols-rounded').innerText = 'mic'; // Update icon to mic on
     };
 
     recognition.onresult = function (event) {
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     recognition.onend = function () {
-      startButton.innerText = '🎤';
+      startButton.querySelector('.material-symbols-rounded').innerText = 'mic'; // Update icon to mic off
     };
 
     startButton.onclick = function () {
