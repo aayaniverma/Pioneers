@@ -3,7 +3,7 @@ from transformers import GPT2LMHeadModel, GPT2Tokenizer
 import torch
 
 # Load the dataset (for tokenization purposes)
-data = pd.read_csv('/Users/diya/testata/output.csv')
+data = pd.read_csv('/Users/diya/tata/Tata-InnoVent/test/output.csv')
 
 # Initialize tokenizer and model
 model_name = 'gpt2'
