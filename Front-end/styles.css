@@ -29,7 +29,7 @@ body {
 
 .light-mode .message-input .send-btn:hover, 
 .light-mode .message-input .voice-btn:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);;
   color: white;
 }
 
@@ -37,21 +37,31 @@ body {
   color: black;
 }
 
+.light-mode .t1 .button-text {
+  color: black;
+}
+
+.light-mode .message-box::placeholder {
+  color: black;
+}
+
 /* Dark Mode Styles */
 .dark-mode {
-  background-color:rgb(60, 60, 60);
+  background-color: rgb(60, 60, 60);
   color: #f5f5f5;
 }
 
 .dark-mode .sidebar {
-  background-color:#6610f2;
+  background-color: #6610f2;
 }
 
 .dark-mode .message-input {
-  background-color:#6610f2;
-  border-color:#6610f2;
+  background-color: #6610f2;
+  border-color: #6610f2;
+  color: white;
 }
 
+.dark-mode .message-input .message-box,
 .dark-mode .message-input .send-btn, 
 .dark-mode .message-input .voice-btn {
   color: white;
@@ -59,11 +69,19 @@ body {
 
 .dark-mode .message-input .send-btn:hover, 
 .dark-mode .message-input .voice-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);;
   color: black;
 }
 
 .dark-mode .material-symbols-rounded {
+  color: white;
+}
+
+.dark-mode .t1 .button-text {
+  color: white;
+}
+
+.dark-mode .message-box::placeholder {
   color: white;
 }
 
