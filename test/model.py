@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, GPT2LMHeadModel, GPT2Tokenizer, AdamW
 import torch
 
 # Load the dataset
-data = pd.read_csv('/Users/diya/testata/output.csv')
+data = pd.read_csv('/Users/diya/tata/Tata-InnoVent/test/output.csv')
 
 # Initialize tokenizer
 tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
