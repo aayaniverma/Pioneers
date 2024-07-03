@@ -9,16 +9,35 @@ document.addEventListener('DOMContentLoaded', function () {
   const startButton = document.getElementById('voice-btn');
   let recognition;
 
+  body.classList.add('light-mode');
+
   toggleBtn.addEventListener('click', function () {
     sidebar.classList.toggle('expanded');
   });
 
   modeToggle.addEventListener('click', function () {
     body.classList.toggle('dark-mode');
+    body.classList.toggle('light-mode');
     if (body.classList.contains('dark-mode')) {
       modeToggle.textContent = '☀️';
     } else {
       modeToggle.textContent = '🌙';
+    }
+  });
+
+  sendBtn.addEventListener('click', function () {
+    const message = messageBox.value.trim();
+    if (message) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message');
+      if (message) {
+        const textElement = document.createElement('p');
+        textElement.textContent = message;
+        messageElement.appendChild(textElement);
+      }
+      messagesContainer.appendChild(messageElement);
+      messageBox.value = '';
+      messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to bottom
     }
   });
 
