@@ -1,3 +1,9 @@
+import nltk
+import ssl
+
+ssl._create_default_https_context = ssl._create_unverified_context
+
+nltk.download('wordnet', quiet=True)
 import pandas as pd
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 import torch
@@ -5,16 +11,12 @@ import spacy
 from nltk.corpus import wordnet
 import nltk
 
-# Download NLTK's WordNet if not already downloaded
 nltk.download('wordnet')
 
-# Load Spacy model
 nlp = spacy.load('en_core_web_sm')
 
-# Load the dataset (for tokenization purposes)
 data = pd.read_csv('/Users/diya/tata/Tata-InnoVent/test/output.csv')
 
-# Initialize tokenizer and model
 model_name = 'gpt2'
 tokenizer = GPT2Tokenizer.from_pretrained(model_name)
 model = GPT2LMHeadModel.from_pretrained(model_name)
