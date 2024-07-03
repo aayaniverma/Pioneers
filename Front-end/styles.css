@@ -91,7 +91,7 @@ body {
 
 /* Common Styles */
 .sidebar {
-  width: 90px;
+  width: 95px;
   color: white;
   display: flex;
   flex-direction: column;
