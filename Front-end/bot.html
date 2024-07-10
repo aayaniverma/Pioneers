@@ -12,18 +12,31 @@
     <button class="toggle-btn" id="toggle-btn"><span class="material-symbols-rounded" style="font-size: 45px;">search_hands_free</span></button>
     <button class="t1" id="t1"><span class="material-symbols-rounded" style="font-size: 40px;">add</span>
       <span class="button-text">New Chat</span></button>
-    <button class="t2" id="t2"><span class="material-symbols-rounded" style="font-size: 40px;">directions_car</span>
-      <span class="button-text">Fuel Car Dashboard Icons</span></button>
-    <button class="t3" id="t3"><span class="material-symbols-rounded" style="font-size: 40px;">electric_car</span>
-      <span class="button-text">EV Car Dashboard Icons</span></button>
   </div>
 
   <div class="main-content">
     <button class="mode-toggle" id="mode-toggle">🌙</button>
     <div class="chat-section">
+      <h1>Hey!</h1>
+      <h2>Car broke down?</h2>
+      <h2>Consult us before you do too!!</h2>
       <div class="messages" id="messages">
         <!-- Chat messages will go here -->
       </div>
+      <div class="car-buttons">
+        <button class="t2" id="t2"><span class="material-symbols-rounded" style="font-size: 40px;">directions_car</span>
+          <span class="button-txt">Fuel Car Dashboard Icons</span></button>
+        <button class="t3" id="t3"><span class="material-symbols-rounded" style="font-size: 40px;">electric_car</span>
+          <span class="button-txt">EV Car Dashboard Icons</span></button>
+      </div>
+      <div class="direction-car-buttons" id="direction-car-buttons">
+        <!-- Buttons will be dynamically added here -->
+      </div>
+      <div class="electric-car-buttons" id="electric-car-buttons">
+        <!-- Buttons will be dynamically added here -->
+      </div>
+      <button class="show-more-btn" id="show-more-btn" style="display: none;" onclick="toggleShowMore('direction-car')">Show More</button>
+      <button class="show-more-btn" id="show-more-electric-btn" style="display: none;" onclick="toggleShowMore('electric-car')">Show More</button>
       <div class="message-input">
         <input class="message-box" type="text" placeholder="Type a query" id="message-box">
         <button class="voice-btn" id="voice-btn"><span class="material-symbols-rounded">mic</span></button>
