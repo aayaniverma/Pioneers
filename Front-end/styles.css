@@ -9,13 +9,13 @@ body {
 }
 
 /* Light Mode Styles */
+
 .light-mode {
   background-color: #f5f5f5;
   color: #333;
 }
 
-.light-mode .t2,
-.light-mode .t3{
+.light-mode .car-buttons button{
   background-color: #cfe2ff;
 }
 
@@ -42,9 +42,7 @@ body {
   color: black;
 }
 
-.light-mode .t1 .button-text,
-.light-mode .t2 .button-txt,
-.light-mode .t3 .button-txt {
+.light-mode .button-text {
   color: black;
 }
 
@@ -62,8 +60,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: calc(100% - 120px);
-  padding: 20px;
+  padding: 10px;
   overflow-y: auto;
 }
 
@@ -84,25 +81,20 @@ body {
   margin-top: 20px;
 }
 
-.light-mode.chat-section h1,
-.light-mode .chat-section h2 {
+.light-mode .chat-section h1{
   padding-top: 1px;
   margin: 5px 0;
-  font-family: cursive;
-  font-weight: bold;
-  color:rgb(17, 81, 101); /* Set the color for headings */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Add a subtle text shadow */
+  color:rgb(17, 81, 101);
 }
 
-
 /* Dark Mode Styles */
+
 .dark-mode {
   background-color: rgb(60, 60, 60);
   color: #f5f5f5;
 }
 
-.dark-mode .t2,
-.dark-mode .t3{
+.dark-mode .car-buttons button{
   background-color: #6610f2;
 }
 
@@ -132,9 +124,7 @@ body {
   color: white;
 }
 
-.dark-mode .t1 .button-text,
-.dark-mode .t2 .button-txt,
-.dark-mode .t3 .button-txt {
+.dark-mode .button-text {
   color: white;
 }
 
@@ -152,8 +142,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: calc(100% - 120px);
-  padding: 20px;
+  padding: 10px;
   overflow-y: auto;
 }
 
@@ -174,14 +163,10 @@ body {
   margin-top: 20px;
 }
 
-.dark-mode .chat-section h1,
-.dark-mode .chat-section h2 {
+.dark-mode .chat-section h1{
   padding-top: 1px;
   margin: 5px 0;
-  font-family: cursive;
-  font-weight: bold;
   color:rgb(194, 233, 245); /* Set the color for headings */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Add a subtle text shadow */
 }
 
 /* Common Styles */
@@ -234,7 +219,7 @@ body {
 }
 
 .sidebar.expanded .t1 {
-  width: 180px;
+  width: 190px;
   border-radius: 20px;
   justify-content: flex-start;
   padding-left: 10px;
@@ -244,7 +229,7 @@ body {
   transition: margin 0.3s;
 }
 
-.sidebar.expanded .material-icons {
+.sidebar .expanded .material-icons {
   margin-right: 10px;
 }
 
@@ -256,6 +241,7 @@ body {
 .sidebar.expanded .button-text {
   display: inline;
 }
+
 
 .main-content {
   flex: 1;
@@ -277,7 +263,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: calc(100% - 120px);
+  height: calc(100% - 20px);
   padding: 20px;
   overflow-y: auto;
 }
@@ -326,21 +312,109 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-.chat-section h1, .chat-section h2 {
-  padding-top: 1px;
-  margin: 5px 0;
-  font-family: cursive;
-  font-weight: bold;
-  color:rgb(17, 81, 101); /* Set the color for headings */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Add a subtle text shadow */
+.car-buttons {
+  display: flex; /* Adjust as needed */
+  flex-direction:row;
 }
 
-.car-buttons {
+.car-buttons .t2, .car-buttons .t3{
+  margin: 0 200px; /* Adjust spacing between buttons */
   display: flex;
   justify-content: center;
-  margin-bottom: 170px; /* Adjust as needed */
+  margin-bottom: 170px;
+  gap: 20px;
+
 }
 
-.car-buttons .t2, .car-buttons .t3 {
-  margin: 0 150px; /* Adjust spacing between buttons */
+.hidden {
+  display: none;
 }
+
+.direction-car-buttons button,
+.electric-car-buttons button {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  font-size: 26px;
+  width: 280px;
+  height: 160px;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin: 10px 20px;
+  border: none;
+}
+
+.d button{
+  display:flex;
+  align-items: center;
+  padding: 5px;
+  font-size: 26px;
+  width: 1000px;
+  height: 160px;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin: 10px 20px;
+  border: none;
+  justify-content: center;
+}
+
+.car-buttons button img,
+.direction-car-buttons button img,
+.electric-car-buttons button img {
+  max-width: 120px;
+  max-height: 90px;
+  margin-right: 10px;
+}
+
+.button-txt {
+  display: inline-block;
+}
+
+
+.ml14 {
+  font-weight: 200;
+  font-size: 3.2em;
+}
+
+.ml14 .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.1em;
+  padding-right: 0.05em;
+  padding-bottom: 0.15em;
+}
+
+.light-mode .ml14 .line {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: black;
+  transform-origin: 100% 100%;
+  bottom: 0;
+}
+
+.dark-mode .ml14 .line {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #fff;
+  transform-origin: 100% 100%;
+  bottom: 0;
+}
+
+.ml14 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+
+
+
+
+
+
+

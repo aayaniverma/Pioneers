@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const sendBtn = document.querySelector('.send-btn');
   const messagesContainer = document.getElementById('messages');
   const startButton = document.getElementById('voice-btn');
+  const t2 = document.getElementById('t2');
+  const t3 = document.getElementById('t3');
+  const t4 = document.getElementById('t4');
   let recognition;
 
   body.classList.add('light-mode');
@@ -75,5 +78,51 @@ document.addEventListener('DOMContentLoaded', function () {
       recognition.start();
     };
   }
+
+  t2.addEventListener('click', function () {
+    t2.style.display = 'none';
+    t3.style.display = 'none';
+    document.getElementById('direction-car-buttons').style.display = 'block';
+  });
+
+  t3.addEventListener('click', function () {
+    t2.style.display = 'none';
+    t3.style.display = 'none';
+    document.getElementById('electric-car-buttons').style.display = 'block';
+  });
+
+  t4.addEventListener('click', function () {
+    document.getElementById('d').style.display = 'block';
+  });
+
+  
+  var textWrapper = document.querySelector('.ml14 .letters');
+textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+anime.timeline({loop: true})
+  .add({
+    targets: '.ml14 .line',
+    scaleX: [0,1],
+    opacity: [0.5,1],
+    easing: "easeInOutExpo",
+    duration: 900
+  }).add({
+    targets: '.ml14 .letter',
+    opacity: [0,1],
+    translateX: [40,0],
+    translateZ: 0,
+    scaleX: [0.3, 1],
+    easing: "easeOutExpo",
+    duration: 800,
+    offset: '-=600',
+    delay: (el, i) => 150 + 25 * i
+  }).add({
+    targets: '.ml14',
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 1000
+  });
+
 
 });

@@ -17,9 +17,12 @@
   <div class="main-content">
     <button class="mode-toggle" id="mode-toggle">🌙</button>
     <div class="chat-section">
-      <h1>Hey!</h1>
-      <h2>Car broke down?</h2>
-      <h2>Consult us before you do too!!</h2>
+      <h1 class="ml14">
+        <span class="text-wrapper">
+          <span class="letters">Car broke down? Consult us before you do too !! </span>
+          <span class="line"></span>
+        </span>
+      </h1>
       <div class="messages" id="messages">
         <!-- Chat messages will go here -->
       </div>
@@ -28,15 +31,19 @@
           <span class="button-txt">Fuel Car Dashboard Icons</span></button>
         <button class="t3" id="t3"><span class="material-symbols-rounded" style="font-size: 40px;">electric_car</span>
           <span class="button-txt">EV Car Dashboard Icons</span></button>
+      
+      <div class="direction-car-buttons hidden" id="direction-car-buttons">
+        <button class="t4" id="t4"><img src="f1e.jpg"><span class="button-txt">Engine Warning Light</span></button>
+        <button class="t5" id="t5"><img src="f2b.jpg"><span class="button-txt">Battery Alert</span></button>
       </div>
-      <div class="direction-car-buttons" id="direction-car-buttons">
-        <!-- Buttons will be dynamically added here -->
+      <div class="d hidden" id="d">
+        <button class="t4i" id="t4i"><span class="button-txt"><p>-Indicates a problem with the engine or emission system.</p>
+        <p>-Check the engine and take the car to a mechanic for a diagnostic test.</p></span></button>
       </div>
-      <div class="electric-car-buttons" id="electric-car-buttons">
-        <!-- Buttons will be dynamically added here -->
-      </div>
-      <button class="show-more-btn" id="show-more-btn" style="display: none;" onclick="toggleShowMore('direction-car')">Show More</button>
-      <button class="show-more-btn" id="show-more-electric-btn" style="display: none;" onclick="toggleShowMore('electric-car')">Show More</button>
+      <div class="electric-car-buttons hidden" id="electric-car-buttons">
+        <button class="t6" id="t6"><img src="e1p.jpg"><span class="button-txt">Power Limitation Warning</span></button>
+        <button class="t7" id="t7"><img src="e2f.png"><span class="button-txt">Charging Status Indicator</span></button>
+      </div></div>
       <div class="message-input">
         <input class="message-box" type="text" placeholder="Type a query" id="message-box">
         <button class="voice-btn" id="voice-btn"><span class="material-symbols-rounded">mic</span></button>
@@ -46,5 +53,7 @@
   </div>
 
   <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
 </body>
 </html>
