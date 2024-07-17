@@ -93,9 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('electric-car-buttons').style.display = 'block';
   });
 
-  t4.addEventListener('click', function () {
-    document.getElementById('d').style.display = 'block';
-  });
+  
 
   
   var textWrapper = document.querySelector('.ml14 .letters');

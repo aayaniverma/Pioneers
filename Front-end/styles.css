@@ -87,11 +87,19 @@ body {
   color:rgb(17, 81, 101);
 }
 
+.light-mode a{
+  background:#cfe2ff;
+}
+
 /* Dark Mode Styles */
 
 .dark-mode {
   background-color: rgb(60, 60, 60);
   color: #f5f5f5;
+}
+
+.dark-mode a{
+  background:#6610f2;
 }
 
 .dark-mode .car-buttons button{
@@ -296,6 +304,7 @@ body {
   padding: 5px 10px;
   width:90%;
   margin-left: 30px;
+  margin-bottom: 10px;
   
 }
 
@@ -349,34 +358,27 @@ body {
   align-items: center;
   padding: 5px;
   font-size: 26px;
-  width: 280px;
   height: 160px;
   border-radius: 10px;
   padding-left: 10px;
-  margin: 10px 20px;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   border: none;
+  margin-right: none;
 }
 
-.d button{
-  display:flex;
-  align-items: center;
-  padding: 5px;
-  font-size: 26px;
-  width: 1000px;
-  height: 160px;
-  border-radius: 10px;
-  padding-left: 10px;
-  margin: 10px 20px;
-  border: none;
-  justify-content: center;
-}
 
 .car-buttons button img,
-.direction-car-buttons button img,
-.electric-car-buttons button img {
+.direction-car-buttons button a img,
+.electric-car-buttons button a img {
   max-width: 120px;
   max-height: 90px;
-  margin-right: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 .button-txt {
@@ -425,6 +427,80 @@ body {
   line-height: 1em;
 }
 
+
+a{
+  position: relative;
+  color:black;
+  width:200px;
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  overflow: hidden;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  font-size: 24px;
+  }
+
+a:hover{
+  width: 1400px;
+  transition-delay: 0.5s;
+  }
+      
+a::before{
+  content: "";
+  position: absolute;
+  right: 25px;
+  width: 12px;
+  height: 12px;
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+  transform: rotate(45deg);
+  }
+  
+a:hover::before{
+  transform: rotate(45deg) translate (50px,-50px);
+  visibility: hidden;
+  }
+
+ a img{
+  visibility: visible;
+}
+
+a::after{
+  content: "";
+  position: absolute;
+  left:-50px;
+  width: 12px;
+  height: 12px;
+  border-top: 3px solid #fff;
+  border-right:3px solid #fff;
+  transform: rotate(45deg) translate(-50px, 50px);}
+  
+a:hover::after{
+  transform: rotate(45deg) translate(50px,-50px);
+  transition-delay: 1s;
+  }
+  
+a span{
+  visibility: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  transition: 0.5s;
+  transform: translate(-30px);
+  }
+
+a:hover span{
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0.75s;
+  
+transform: translatex(10px);}
+
+a:hover img{
+  visibility: hidden;
+}
 
 
 
