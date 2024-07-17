@@ -37,8 +37,9 @@ Installation:
 Clone the Repository:
    
    bash:
-   git clone https://github.com/yourusername/ai-vehicle-troubleshooting.git
-   cd ai-vehicle-troubleshooting
+   
+   [git clone https://github.com/yourusername/ai-vehicle-troubleshooting.git](https://github.com/aayaniverma/Tata-InnoVent.git)
+  
 
 
 
