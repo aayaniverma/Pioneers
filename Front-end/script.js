@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   toggleBtn.addEventListener('click', function () {
     sidebar.classList.toggle('expanded');
+    document.documentElement.style.setProperty('--sidebar-width', sidebar.classList.contains('expanded') ? 'var(--sidebar-expanded-width)' : '90px');
+    toggleBtn.classList.toggle('rotate');
   });
 
   modeToggle.addEventListener('click', function () {
