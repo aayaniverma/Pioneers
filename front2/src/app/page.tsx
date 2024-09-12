@@ -1,4 +1,5 @@
 "use client";
+
 import { TextGenerateEffect } from "../components/ui/text-generate-effect";
 import ChatWindow from '../components/ChatWindow';
 import MessageInput from '../components/MessageInput';
@@ -8,7 +9,8 @@ import MessageInput from '../components/MessageInput';
 export default function Chatbot() {
   const words = 'Car Broke Down? Consult us before you do too!!';
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    
+    <div className= 'ml-20 min-h-screen bg-gray-100 flex flex-col'>
       <header className="text-white p-4 shadow-md" style={{ backgroundColor: '#AFEEEE',opacity: '0.5'}}>
         {/* Render the TextGenerateEffect component in the header */}
         <TextGenerateEffect words={words} />

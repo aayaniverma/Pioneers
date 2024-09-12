@@ -2,16 +2,14 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useSidebar } from '../app/context/SidebarContext';
+
 
 export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
+  const { isOpen, toggleSidebar } = useSidebar();
 
   return (
-    <div className="flex">
+    <div className="fixed flex">
       <div className={`bg-gray-800 text-white h-screen p-5 pt-8 ${isOpen ? 'w-64' : 'w-20'} duration-300 relative flex flex-col`}>
         {/* Toggle button positioned at the top center */}
         <button
@@ -29,7 +27,7 @@ export default function Sidebar() {
         {/* Sidebar content */}
         <div className="flex flex-col mt-16">
           <div className="flex flex-col gap-4 mt-8">
-            <button className="flex items-center transition-all duration-300 ease-in-out">
+            <button className="fixed flex items-center transition-all duration-300 ease-in-out">
               <span className="material-symbols-rounded" style={{ fontSize: '50px', transform: 'translateX(-8px)' }}>add</span>
               {isOpen && <span className="text-2xl ml-2">New Chat</span>}
             </button>
