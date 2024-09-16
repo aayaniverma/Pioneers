@@ -5,20 +5,20 @@ import ChatWindow from '../components/ChatWindow';
 import MessageInput from '../components/MessageInput';
 import Link from 'next/link';
 
-
-
 export default function Chatbot() {
   const words = 'Car Broke Down? Consult us before you do too!!';
 
   return (
     
-    <div className= 'ml-20 min-h-screen bg-gray-100 flex flex-col'>
-      <header className="text-white p-4 shadow-md" style={{ backgroundColor: '#AFEEEE',opacity: '0.5'}}>
+    <div className= 'ml-20  min-h-screen  flex flex-col'>
+      <header
+        className="text-white p-4 shadow-md fixed top-0 w-full z-50"
+        style={{ backgroundColor: 'white' }}
+      >
         {/* Render the TextGenerateEffect component in the header */}
         <TextGenerateEffect words={words} />
       </header>
-
-      <main className="flex-grow p-6">
+      <main className="flex-grow p-6 mt-16">
       <div className="flex justify-center mb-6">
       <div className="grid grid-cols-2 gap-20">
       <Link href="/fuel">
@@ -35,12 +35,12 @@ export default function Chatbot() {
 
 
       </div>
-        <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-4">
+        <div className="max-w-2xl mx-auto bg-black rounded-lg shadow-lg p-4">
           <ChatWindow />
         </div>
       </main>
 
-      <footer className="p-4 bg-white shadow-inner">
+      <footer className="p-4 bg-black shadow-inner">
         <MessageInput />
       </footer>
     </div>
