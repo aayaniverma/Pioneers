@@ -2,22 +2,24 @@
 
 import React, { useState } from 'react';
 
-// Import images
-import img1 from './images/1.png';
-import img2 from './images/2.png';
-import img3 from './images/3.png';
-import img4 from './images/4.png';
-import img5 from './images/5.png';
-import img6 from './images/6.png';
-import img7 from './images/7.png';
-import img8 from './images/8.png';
-import img9 from './images/9.png';
-import img10 from './images/10.png';
-import img11 from './images/11.png';
-import img12 from './images/12.png';
-import img13 from './images/13.png';
-import img14 from './images/14.png';
-import img15 from './images/15.png';
+// Image paths (from the public folder, no need to import)
+const imgPaths = [
+  '/fuel/1.png',
+  '/fuel/2.png',
+  '/fuel/3.png',
+  '/fuel/4.png',
+  '/fuel/5.png',
+  '/fuel/6.png',
+  '/fuel/7.png',
+  '/fuel/8.png',
+  '/fuel/9.png',
+  '/fuel/10.png',
+  '/fuel/11.png',
+  '/fuel/12.png',
+  '/fuel/13.png',
+  '/fuel/14.png',
+  '/fuel/15.png',
+];
 
 export default function Fuel() {
   // State to control table visibility
@@ -25,95 +27,96 @@ export default function Fuel() {
 
   const symbols = [
     { 
-      img: img1, 
+      img: imgPaths[0], 
       name: "Engine Warning Light", 
       description: "Indicates a problem with the engine or emissions system.", 
       solution: "Check the engine and take the car to a mechanic for a diagnostic test."
     },
     { 
-      img: img2, 
+      img: imgPaths[1], 
       name: "Battery Alert", 
       description: "Indicates a problem with the car's charging system.", 
       solution: "Check the battery and alternator; replace if necessary."
     },
     { 
-      img: img3, 
+      img: imgPaths[2], 
       name: "Oil Pressure Warning", 
       description: "Indicates low oil pressure or low oil level.", 
       solution: "Check oil levels and refill if necessary; inspect for leaks."
     },
     { 
-      img: img4, 
+      img: imgPaths[3], 
       name: "Brake System Alert", 
       description: "Indicates an issue with the brake system.", 
       solution: "Check brake fluid levels and brake pads; consult a mechanic."
     },
     { 
-      img: img5, 
+      img: imgPaths[4], 
       name: "ABS Warning Light", 
       description: "Indicates a problem with the anti-lock braking system.", 
       solution: "Have the ABS system inspected by a professional."
     },
     { 
-      img: img6, 
+      img: imgPaths[5], 
       name: "Tire Pressure Warning", 
       description: "Indicates low tire pressure.", 
       solution: "Check tire pressure and inflate to the recommended level."
     },
     { 
-      img: img7, 
+      img: imgPaths[6], 
       name: "Airbag Warning Light", 
       description: "Indicates an issue with the airbag system.", 
       solution: "Have the airbag system checked by a professional."
     },
     { 
-      img: img8, 
+      img: imgPaths[7], 
       name: "Temperature Warning Light", 
       description: "Indicates the engine temperature is too high.", 
       solution: "Check coolant levels and radiator; allow the engine to cool."
     },
     { 
-      img: img9, 
+      img: imgPaths[8], 
       name: "Check Engine Light", 
       description: "Indicates the engine needs to be checked.", 
       solution: "Use a diagnostic tool to read the error code; consult a mechanic."
     },
     { 
-      img: img10, 
+      img: imgPaths[9], 
       name: "Fuel Level Warning", 
       description: "Indicates low fuel level.", 
       solution: "Refill the fuel tank as soon as possible."
     },
     { 
-      img: img11, 
+      img: imgPaths[10], 
       name: "Door Ajar", 
       description: "Indicates that one or more doors are open.", 
       solution: "Check all doors and close them securely."
     },
     { 
-      img: img12, 
+      img: imgPaths[11], 
       name: "Seat Belt Reminder", 
       description: "Indicates that seat belts are not fastened.", 
       solution: "Fasten seat belts."
     },
     { 
-      img: img13, 
+      img: imgPaths[12], 
       name: "Traction Control Light", 
       description: "Indicates the traction control system is active or has a fault.", 
       solution: "If active, drive cautiously; if faulty, have it inspected."
     },
     { 
-      img: img14, 
+      img: imgPaths[13], 
       name: "ESP/BAS Light", 
       description: "Indicates an issue with the electronic stability program.", 
       solution: "Have the system checked by a mechanic."
     },
     { 
-      img: img15, 
+      img: imgPaths[14], 
       name: "Cruise Control Indicator", 
       description: "Indicates that cruise control is active.", 
       solution: "Ensure safe driving speed and be ready to deactivate if necessary."
     },
+    // Add the remaining symbols similarly
   ];
 
   const handleClose = () => {
@@ -123,7 +126,7 @@ export default function Fuel() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col p-8">
+    <div className="ml-20 min-h-screen bg-black flex flex-col p-8">
       {showTable ? (
         <div className="relative">
           {/* Close button */}

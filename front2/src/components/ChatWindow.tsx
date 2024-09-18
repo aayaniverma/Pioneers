@@ -109,7 +109,7 @@ export default function ChatWindow({ onSending }: ChatWindowProps) {
       </div>
       <div className={styles.inputContainer}>
         <input
-          className="input input-bordered input-primary w-full"
+          className="input input-bordered input-primary w-full bg-black"
           type="text"
           id="userMessage"
           value={userMessage}
@@ -119,11 +119,11 @@ export default function ChatWindow({ onSending }: ChatWindowProps) {
           placeholder="Type your message here..."
         />
         <div className={styles.buttonContainer}>
-          <button className={`btn btn-circle btn-outline ${styles.button}`} id="sendButton" onClick={sendMessage} disabled={isSending}>
+          <button className={`btn btn-circle btn-outline btn-primary ${styles.button}`} id="sendButton" onClick={sendMessage} disabled={isSending}>
             <span className="material-symbols-rounded" style={{ fontSize: '30px' }}>send</span>
           </button>
-          <button className={`btn btn-circle btn-outline ${styles.button}`} onClick={startSpeechRecognition}><span className="material-symbols-rounded" style={{ fontSize: '30px' }}>mic</span></button>
-          <button className={`btn btn-circle btn-outline ${styles.button}`} onClick={speakResponse}><span className="material-symbols-rounded" style={{ fontSize: '30px' }}>brand_awareness</span></button>
+          <button className={`btn btn-circle btn-outline btn-primary ${styles.button}`} onClick={startSpeechRecognition}><span className="material-symbols-rounded" style={{ fontSize: '30px' }}>mic</span></button>
+          <button className={`btn btn-circle btn-outline btn-primary ${styles.button}`} onClick={speakResponse}><span className="material-symbols-rounded" style={{ fontSize: '30px' }}>brand_awareness</span></button>
         </div>
       </div>
       
