@@ -1,0 +1,134 @@
+<div id="chatBox">
+</div>
+<input type="text" id="userMessage" placeholder="Type your message here..." />
+<button id="sendButton" onclick="sendMessage()">Send</button>
+<button onclick="startSpeechRecognition()">Speak</button> <!-- Speech-to-text button -->
+<button onclick="speakResponse()">Play Response</button> <!-- Text-to-speech button -->
+<div id="micIndicator" style="display: none;">
+    <p>🎤 Microphone is recording...</p>
+</div>
+
+<script>
+    var recognition; // SpeechRecognition instance
+    var lastBotResponse = ''; // To store the last bot response for text-to-speech
+    var isSpeaking = false; // To track if TTS is already playing
+    var isSending = false; // To prevent multiple sends
+
+    // Function to send message and get chatbot response
+    // Function to send message and get chatbot response
+    function sendMessage() {
+        if (isSending) return; // Prevent multiple sends
+        isSending = true; // Set sending state to true
+
+        var userMessage = $("#userMessage").val();
+
+        // Clear the input field immediately after retrieving the message
+        $("#userMessage").val('');
+
+        // Disable the send button while the request is processed
+        $("#sendButton").attr("disabled", true);
+
+        // Send user message to backend to get a response
+        $.post("/Chat/GetResponseFromPdf", { userMessage: userMessage }, function (data) {
+            // Append user's message in bold
+            $("#chatBox").append("<p><strong>User:</strong> " + userMessage + "</p>");
+
+            // Append chatbot's response in bold and store for TTS
+            lastBotResponse = data.response;
+            $("#chatBox").append("<p><strong>Chatbot:</strong> " + data.response + "</p>");
+
+            // Re-enable the send button and reset sending state
+            $("#sendButton").attr("disabled", false);
+            isSending = false;
+        }).fail(function () {
+            // In case of an error, re-enable the send button and reset sending state
+            $("#sendButton").attr("disabled", false);
+            isSending = false;
+        });
+    }
+
+    // Function to start speech recognition (Web Speech API)
+    function startSpeechRecognition() {
+        if (!('webkitSpeechRecognition' in window)) {
+            alert("Sorry, your browser doesn't support speech recognition.");
+            return;
+        }
+
+        // Create a new instance of webkitSpeechRecognition
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = false; // Single recognition session
+        recognition.interimResults = true; // Show partial results while speaking
+        recognition.lang = 'en-US'; // Set language (adjust if needed)
+
+        // When recognition starts
+        recognition.onstart = function () {
+            $("#micIndicator").show(); // Show the microphone indicator
+            // Automatically stop the recognition after 10 seconds
+            setTimeout(function () {
+                stopSpeechRecognition();
+            }, 10000); // Stops recording after 10 seconds
+        };
+
+        // When recognition gets a result
+        recognition.onresult = function (event) {
+            var transcript = '';
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+                transcript += event.results[i][0].transcript;
+            }
+            // Display the transcript in the input box
+            $("#userMessage").val(transcript);
+        };
+
+        // When recognition ends, send the message automatically
+        recognition.onend = function () {
+            $("#micIndicator").hide(); // Hide the microphone indicator
+            sendMessage(); // Automatically send the message after recognition stops
+        };
+
+        // Handle speech recognition errors
+        recognition.onerror = function (event) {
+            console.error("Speech recognition error: " + event.error);
+            $("#micIndicator").hide(); // Hide the mic indicator on error
+        };
+
+        recognition.start(); // Start speech recognition
+    }
+
+    // Function to stop speech recognition manually
+    function stopSpeechRecognition() {
+        if (recognition) {
+            recognition.stop(); // Stop speech recognition
+            $("#micIndicator").hide(); // Hide the microphone indicator
+        }
+    }
+
+    // Function to trigger text-to-speech for the last chatbot response
+    function speakResponse() {
+        // Check if speech synthesis is already in progress
+        if (isSpeaking) {
+            console.log("Speech synthesis already in progress. Ignoring repeated clicks.");
+            return;
+        }
+
+        // If no bot response, alert user
+        if (!lastBotResponse) {
+            alert("No response available to play.");
+            return;
+        }
+
+        // Create a speech synthesis utterance
+        var utterance = new SpeechSynthesisUtterance(lastBotResponse);
+        utterance.lang = 'en-US'; // Set language (adjust if needed)
+
+        // Set flag to true indicating speech is in progress
+        isSpeaking = true;
+
+        // When the speech synthesis ends, reset the flag
+        utterance.onend = function () {
+            isSpeaking = false;
+        };
+
+        // Play the response
+        speechSynthesis.speak(utterance);
+    }
+</script>
