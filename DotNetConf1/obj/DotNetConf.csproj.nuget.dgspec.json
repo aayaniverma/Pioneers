@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/diyagoyal/DotNetConf1/DotNetConf.csproj": {}
+    "/Users/diyagoyal/final_tata/Pioneers/DotNetConf1/DotNetConf.csproj": {}
   },
   "projects": {
-    "/Users/diyagoyal/DotNetConf1/DotNetConf.csproj": {
+    "/Users/diyagoyal/final_tata/Pioneers/DotNetConf1/DotNetConf.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/diyagoyal/DotNetConf1/DotNetConf.csproj",
+        "projectUniqueName": "/Users/diyagoyal/final_tata/Pioneers/DotNetConf1/DotNetConf.csproj",
         "projectName": "DotNetConf",
-        "projectPath": "/Users/diyagoyal/DotNetConf1/DotNetConf.csproj",
+        "projectPath": "/Users/diyagoyal/final_tata/Pioneers/DotNetConf1/DotNetConf.csproj",
         "packagesPath": "/Users/diyagoyal/.nuget/packages/",
-        "outputPath": "/Users/diyagoyal/DotNetConf1/obj/",
+        "outputPath": "/Users/diyagoyal/final_tata/Pioneers/DotNetConf1/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/diyagoyal/.nuget/NuGet/NuGet.Config"

@@ -1,0 +1,446 @@
+<!-- HTML Structure -->
+<div class="app-container">
+    <div class="navbar">
+        <h1 class="app-name">CarAssist</h1>
+    </div>
+
+    <div class="main-content">
+        <div id="chatContainer" class="chat-container">
+            <div id="chatBox" class="chat-box"></div>
+            <div class="input-container">
+                <input type="text" id="userMessage" placeholder="Type your message..." class="input-field" />
+                <button id="sendButton" onclick="sendMessage()" class="btn btn-send">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                <button onclick="startSpeechRecognition()" class="btn btn-speak">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button onclick="speakResponse()" class="btn btn-play">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+            </div>
+            <div id="micIndicator" class="mic-indicator" style="display: none;">
+                <p><i class="fas fa-microphone"></i> Microphone is recording...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</div>
+
+<!-- JavaScript -->
+<script>
+    var recognition; // SpeechRecognition instance
+    var lastBotResponse = ''; // To store the last bot response for text-to-speech
+    var isSpeaking = false; // To track if TTS is already playing
+    var isSending = false; // To prevent multiple sends
+    var chatHistory = []; // Array to store chat history
+
+    // Function to send message and get chatbot response
+    function sendMessage() {
+        if (isSending) return; // Prevent multiple sends
+        isSending = true; // Set sending state to true
+
+        var userMessage = $("#userMessage").val();
+
+        // Clear the input field immediately after retrieving the message
+        $("#userMessage").val('');
+
+        // Disable the send button while the request is processed
+        $("#sendButton").attr("disabled", true);
+
+        // Add message to history
+        chatHistory.push("User: " + userMessage);
+
+        // Send user message to backend to get a response
+        $.post("/Chat/GetResponseFromPdf", { userMessage: userMessage }, function (data) {
+            // Append user's message in bold
+            $("#chatBox").append("<div class='message user-message'><strong>User:</strong><br>" + userMessage + "</div>");
+
+            // Append chatbot's response in bold and store for TTS
+            lastBotResponse = data.response;
+            $("#chatBox").append("<div class='message bot-message'><strong>Chatbot:</strong><br> " + data.response + "</div>");
+
+            // Add bot response to history
+            chatHistory.push("Chatbot: " + data.response);
+
+            // Re-enable the send button and reset sending state
+            $("#sendButton").attr("disabled", false);
+            isSending = false;
+        }).fail(function () {
+            // In case of an error, re-enable the send button and reset sending state
+            $("#sendButton").attr("disabled", false);
+            isSending = false;
+        });
+    }
+
+    // Function to start speech recognition (Web Speech API)
+    function startSpeechRecognition() {
+        if (!('webkitSpeechRecognition' in window)) {
+            alert("Sorry, your browser doesn't support speech recognition.");
+            return;
+        }
+
+        // Create a new instance of webkitSpeechRecognition
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = false; // Single recognition session
+        recognition.interimResults = true; // Show partial results while speaking
+        recognition.lang = 'en-US'; // Set language (adjust if needed)
+
+        // When recognition starts
+        recognition.onstart = function () {
+            $("#micIndicator").show(); // Show the microphone indicator
+            // Automatically stop the recognition after 10 seconds
+            setTimeout(function () {
+                stopSpeechRecognition();
+            }, 10000); // Stops recording after 10 seconds
+        };
+
+        // When recognition gets a result
+        recognition.onresult = function (event) {
+            var transcript = '';
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+                transcript += event.results[i][0].transcript;
+            }
+            // Display the transcript in the input box
+            $("#userMessage").val(transcript);
+        };
+
+        // When recognition ends, send the message automatically
+        recognition.onend = function () {
+            $("#micIndicator").hide(); // Hide the microphone indicator
+            sendMessage(); // Automatically send the message after recognition stops
+        };
+
+        // Handle speech recognition errors
+        recognition.onerror = function (event) {
+            console.error("Speech recognition error: " + event.error);
+            $("#micIndicator").hide(); // Hide the mic indicator on error
+        };
+
+        recognition.start(); // Start speech recognition
+    }
+
+    // Function to stop speech recognition manually
+    function stopSpeechRecognition() {
+        if (recognition) {
+            recognition.stop(); // Stop speech recognition
+            $("#micIndicator").hide(); // Hide the microphone indicator
+        }
+    }
+
+    // Function to trigger text-to-speech for the last chatbot response
+    // Function to trigger text-to-speech for the last chatbot response
+    function speakResponse() {
+        // Check if speech synthesis is already in progress
+        if (speechSynthesis.speaking) {
+            console.log("Speech synthesis in progress. Stopping the speech.");
+            speechSynthesis.cancel(); // Stop the current speech synthesis
+            isSpeaking = false; // Reset the speaking flag
+            return; // Exit the function to avoid re-triggering
+        }
+
+        // If no bot response, alert user
+        if (!lastBotResponse) {
+            alert("No response available to play.");
+            return;
+        }
+
+        // Create a speech synthesis utterance
+        var utterance = new SpeechSynthesisUtterance(lastBotResponse);
+        utterance.lang = 'en-US'; // Set language (adjust if needed)
+
+        // Set flag to true indicating speech is in progress
+        isSpeaking = true;
+
+        // When the speech synthesis ends, reset the flag
+        utterance.onend = function () {
+            isSpeaking = false;
+        };
+
+        // Play the response
+        speechSynthesis.speak(utterance);
+    }
+    // Function to toggle history view
+    function toggleHistory() {
+        var historyContainer = $("#historyContainer");
+        if (historyContainer.is(":visible")) {
+            historyContainer.hide();
+        } else {
+            var historyList = $("#historyList");
+            historyList.empty();
+            chatHistory.forEach(function (entry) {
+                historyList.append("<li>" + entry + "</li>");
+            });
+            historyContainer.show();
+        }
+    }
+</script>
+<style>
+    /* Body styling */
+    body {
+        background-color: #1e1e1e;
+        color: #e0e0e0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* App layout */
+    .app-container {
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    /* Left side navbar */
+    .navbar {
+        background-color: #2c2c2c;
+        width: 250px;
+        padding: 20px;
+        border-right: 1px solid #444;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Minimal, sleek logo */
+    .logo {
+        width: 150px;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    /* Modern button design */
+    /* Rounded grey buttons with white icons/text */
+    .btn {
+        width: 50px;
+        /* Set a consistent width and height for round buttons */
+        height: 50px;
+        border-radius: 50%;
+        /* Make the button round */
+        background-color: #4a4a4a;
+        /* Neutral grey color */
+        border: none;
+        /* Remove button border */
+        color: #ffffff;
+        /* White text or icons inside */
+        font-size: 20px;
+        /* Adjust the font size for icons */
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        /* Center the content (icon or text) */
+        align-items: center;
+        transition: background-color 0.3s, transform 0.2s;
+        outline: none;
+    }
+
+    .btn:hover {
+        background-color: #5a5a5a;
+        /* Slightly lighter grey on hover */
+    }
+
+    .btn:active {
+        transform: scale(0.95);
+        /* Scale down slightly on click */
+    }
+
+    /* Chat-specific buttons */
+    .btn-send {
+        background-color: #5a5a5a;
+    }
+
+    .btn-speak {
+        background-color: #5a5a5a;
+    }
+
+    .btn-play {
+        background-color: #5a5a5a;
+    }
+
+    .btn-history {
+        background-color: #555;
+    }
+
+    /* Main content container */
+    .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background-color: #2c2c2c;
+        padding: 15px;
+    }
+
+    /* Chat container */
+    .chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Position relative to contain the fixed input container */
+}
+
+/* Chatbox - Scrollable area */
+.chat-box {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto; /* Make the chat box scrollable */
+    border-bottom: 1px solid #444;
+}
+    /* Chatbox for scrolling messages */
+    
+
+    /* Message styling */
+    .message {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 8px;
+        max-width: 70%;
+        line-height: 1.5;
+        word-wrap: break-word;
+    }
+
+    /* User message - aligned to the right (entire box) */
+    .user-message {
+        background-color: #00796b;
+        color: #fff;
+        align-self: flex-end;
+        /* Aligns the entire message box to the right */
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 10px;
+        max-width: 70%;
+        text-align: left;
+        /* Keep text aligned naturally inside the box */
+    }
+
+    /* Bot message - aligned to the left */
+    .bot-message {
+        background-color: #333;
+        color: #e0e0e0;
+        align-self: flex-start;
+        text-align: left;
+    }
+
+    /* Input field and container */
+    .input-container {
+    position: fixed; /* Fix the input container at the bottom */
+    bottom: 0;
+    left: 340px; /* Adjust to match the width of the navbar */
+    right: 90px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #444;
+    background-color: #333;
+}
+
+    /* Sleek input field */
+    .input-field {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background-color: #444;
+        color: #e0e0e0;
+        font-size: 16px;
+        outline: none;
+        transition: background-color 0.3s;
+    }
+
+    .input-field::placeholder {
+        color: #888;
+    }
+
+    .input-field:focus {
+        background-color: #555;
+    }
+
+    /* Microphone indicator */
+    .mic-indicator {
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+        padding: 10px;
+        background-color: #00796b;
+        border-radius: 8px;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* History container on the right */
+    .history-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 250px;
+        height: 100%;
+        background-color: #2c2c2c;
+        padding: 20px;
+        border-left: 1px solid #444;
+        overflow-y: auto;
+        z-index: 1000;
+    }
+
+    /* History container header */
+    .history-container h3 {
+        color: #e0e0e0;
+        margin-bottom: 20px;
+    }
+
+    /* History container list */
+    .history-container ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .history-container li {
+        padding: 10px;
+        border-bottom: 1px solid #444;
+        color: #e0e0e0;
+    }
+
+    /* History container close button */
+    .history-container .btn-close {
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+    }
+
+    /* SVG icons styling */
+    svg {
+        width: 16px;
+        height: 16px;
+        fill: #ffffff;
+        vertical-align: middle;
+    }
+
+    /* Font Awesome icons styling */
+    .fas {
+        font-size: 20px;
+    }
+
+    /* Adjust button styles to fit icons */
+    .btn-send,
+    .btn-speak,
+    .btn-play {
+        background-color: #5a5a5a;
+    }
+
+    .btn-send:hover,
+    .btn-speak:hover,
+    .btn-play:hover {
+        background-color: #444;
+    }
+
+    .btn-send:active,
+    .btn-speak:active,
+    .btn-play:active {
+        transform: scale(0.98);
+    }
+</style>

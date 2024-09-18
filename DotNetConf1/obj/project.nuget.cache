@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "h74wQo5bkpk=",
+  "dgSpecHash": "JYwqb2hyNNc=",
   "success": true,
-  "projectFilePath": "/Users/diyagoyal/DotNetConf1/DotNetConf.csproj",
+  "projectFilePath": "/Users/diyagoyal/final_tata/Pioneers/DotNetConf1/DotNetConf.csproj",
   "expectedPackageFiles": [
     "/Users/diyagoyal/.nuget/packages/azure.ai.openai/1.0.0-beta.8/azure.ai.openai.1.0.0-beta.8.nupkg.sha512",
     "/Users/diyagoyal/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
