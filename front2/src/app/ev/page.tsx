@@ -3,21 +3,23 @@
 import React, { useState } from 'react';
 
 // Import images
-import img1 from './images/1.png';
-import img2 from './images/2.png';
-import img3 from './images/3.png';
-import img4 from './images/4.png';
-import img5 from './images/5.png';
-import img6 from './images/6.png';
-import img7 from './images/7.png';
-import img8 from './images/8.png';
-import img9 from './images/9.png';
-import img10 from './images/10.png';
-import img11 from './images/11.png';
-import img12 from './images/12.png';
-import img13 from './images/13.png';
-import img14 from './images/14.png';
-import img15 from './images/15.png';
+const imgPaths = [
+  '/ev/1.png',
+  '/ev/2.png',
+  '/ev/3.png',
+  '/ev/4.png',
+  '/ev/5.png',
+  '/ev/6.png',
+  '/ev/7.png',
+  '/ev/8.png',
+  '/ev/9.png',
+  '/ev/10.png',
+  '/ev/11.png',
+  '/ev/12.png',
+  '/ev/13.png',
+  '/ev/14.png',
+  '/ev/15.png',
+];
 
 export default function Fuel() {
   // State to control table visibility
@@ -25,94 +27,94 @@ export default function Fuel() {
 
   const symbols = [
     { 
-      img: img1, 
+      img: imgPaths[0], 
       name: "Electric Motor Warning Light", 
       description: "Indicates a problem with the electric motor or powertrain.", 
       solution: "Have the electric motor or powertrain inspected."
     },
     { 
-      img: img2, 
+      img: imgPaths[1], 
       name: "Battery Charge Warning", 
       description: "Indicates an issue with the battery charge level or system.", 
       solution: "Check the battery and charging system."
     },
     { 
-      img: img3, 
+      img: imgPaths[2], 
       name: "Plug-in Indicator", 
       description: "Indicates that the vehicle is plugged in for charging.", 
       solution: "No action needed if charging; unplug if charging is complete."
     },
     { 
-      img: img4, 
+      img: imgPaths[3], 
       name: "Charging Status Indicator", 
       description: "Displays the current charging status of the vehicle.", 
       solution: "Monitor the charging process."
     },
     { 
-      img: img5, 
+      img: imgPaths[4], 
       name: "Power Limitation Warning", 
       description: "Indicates that the power output is being limited.", 
       solution: "Drive cautiously and have the system checked if needed."
     },
     { 
-      img: img6, 
+      img: imgPaths[5], 
       name: "Battery Temperature Warning", 
       description: "Warns of a high battery temperature.", 
       solution: "Allow the battery to cool down."
     },
     { 
-      img: img7, 
+      img: imgPaths[6], 
       name: "Charging Cable Connected", 
       description: "Shows that the charging cable is connected.", 
       solution: "Unplug the cable before driving."
     },
     { 
-      img: img8, 
+      img: imgPaths[7], 
       name: "Regenerative Braking Indicator", 
       description: "Indicates the operation of the regenerative braking system.", 
       solution: "Monitor the system and have it checked if there are issues."
     },
     { 
-      img: img9, 
+      img: imgPaths[8], 
       name: "High Voltage System Warning", 
       description: "Warns of a problem with the high voltage system.", 
       solution: "Have the high voltage system inspected by a professional."
     },
     { 
-      img: img10, 
+      img: imgPaths[9], 
       name: "Eco Mode Indicator", 
       description: "Indicates that the vehicle is in eco mode.", 
       solution: "No action needed; drive efficiently."
     },
     { 
-      img: img11, 
+      img: imgPaths[10], 
       name: "Ready Indicator", 
       description: "Shows that the vehicle is ready to drive.", 
       solution: "No action needed; the vehicle is operational."
     },
     { 
-      img: img12, 
-      name: "EV System Warning Light", 
-      description: "Warns of a system malfunction in the EV.", 
-      solution: "Have the EV system checked by a professional."
+      img: imgPaths[11], 
+      name: "Electronic Power Steering (EPS) Warning Light", 
+      description: "The EPS (Electronic Power Steering) assists driver’s steering effort.", 
+      solution: "If the EPS warning light stays on, have your vehicle inspected by an authorized car dealer."
     },
     { 
-      img: img13, 
-      name: "Battery Cooling System Warning", 
-      description: "Indicates an issue with the battery cooling system.", 
-      solution: "Check and service the battery cooling system."
+      img: imgPaths[12], 
+      name: "Low Tire Pressure Warning Light", 
+      description: "Indicates low tire pressure.", 
+      solution: "Check the tire pressure and inflate the tire if necessary."
     },
     { 
-      img: img14, 
-      name: "Range Indicator", 
-      description: "Displays the remaining range of the vehicle.", 
-      solution: "Plan your trip according to the range."
+      img: imgPaths[13], 
+      name: "Electronic Stability Control (ESC) Indicator Light", 
+      description: "Assists driver’s steering by preventing skidding on the slippery or curved road.", 
+      solution: "If the ESC indicator stays on, have your vehicle inspected by an authorized car dealer."
     },
     { 
-      img: img15, 
-      name: "Preconditioning Indicator", 
-      description: "Indicates that the vehicle is preconditioning the cabin or battery", 
-      solution: "Allow preconditioning to complete before driving."
+      img: imgPaths[14], 
+      name: "Immobilizer Indicator Light", 
+      description: "Prevents vehicle theft by allowing the registered keys to start the vehicle.", 
+      solution: "If the immobilizer indicator light flashes, have your vehicle inspected by an authorized car dealer."
     },
 ];
 
@@ -136,7 +138,7 @@ export default function Fuel() {
           </button>
 
           {/* Heading and Table */}
-          <h1 className="text-2xl font-bold mb-4">Fuel Car Dashboard Icons</h1>
+          <h1 className="text-2xl font-bold mb-4">EV Car Dashboard Icons</h1>
           <p className="mb-6">Below is a table with car dashboard icons, their names, descriptions, and possible solutions:</p>
 
           <table className="table-auto border-collapse w-full mt-4">
