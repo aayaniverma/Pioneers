@@ -1,27 +1,31 @@
-"use client";
+// components/ChatWindow.tsx
 import { useState, useRef } from 'react';
+import styles from './ChatComponent.module.css'; 
 
-export default function ChatComponent() {
+interface ChatWindowProps {
+  onSending: () => void; // Define the type for the prop
+}
+
+export default function ChatWindow({ onSending }: ChatWindowProps) {
   const [userMessage, setUserMessage] = useState('');
   const [chatHistory, setChatHistory] = useState<string[]>([]);
   const [lastBotResponse, setLastBotResponse] = useState('');
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const recognitionRef = useRef<null | any>(null);
-  
+
   // Function to handle sending the message
   const sendMessage = () => {
     if (isSending) return;
     setIsSending(true);
 
-    // Post the user message and get a response from the backend
     fetch('/Chat/GetResponseFromPdf', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userMessage }),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setChatHistory((prev) => [
           ...prev,
           `User: ${userMessage}`,
@@ -29,12 +33,12 @@ export default function ChatComponent() {
         ]);
         setLastBotResponse(data.response);
         setIsSending(false);
+        onSending(); // Call the onSending function passed from the parent
       })
       .catch(() => {
         setIsSending(false);
       });
 
-    // Clear input after sending
     setUserMessage('');
   };
 
@@ -45,7 +49,6 @@ export default function ChatComponent() {
       return;
     }
 
-    // Initialize recognition
     recognitionRef.current = new (window as any).webkitSpeechRecognition();
     recognitionRef.current.continuous = false;
     recognitionRef.current.interimResults = true;
@@ -65,7 +68,7 @@ export default function ChatComponent() {
 
     recognitionRef.current.onend = () => {
       document.getElementById('micIndicator')!.style.display = 'none';
-      sendMessage(); // Send the message after recognition ends
+      sendMessage();
     };
 
     recognitionRef.current.onerror = (event: any) => {
@@ -76,7 +79,6 @@ export default function ChatComponent() {
     recognitionRef.current.start();
   };
 
-  // Function to stop speech recognition manually
   const stopSpeechRecognition = () => {
     if (recognitionRef.current) {
       recognitionRef.current.stop();
@@ -84,7 +86,6 @@ export default function ChatComponent() {
     }
   };
 
-  // Function to trigger text-to-speech for the last chatbot response
   const speakResponse = () => {
     if (isSpeaking || !lastBotResponse) return;
 
@@ -106,18 +107,26 @@ export default function ChatComponent() {
           <p key={index}>{message}</p>
         ))}
       </div>
-      <input
-        type="text"
-        id="userMessage"
-        value={userMessage}
-        onChange={(e) => setUserMessage(e.target.value)}
-        placeholder="Type your message here..."
-      />
-      <button id="sendButton" onClick={sendMessage} disabled={isSending}>
-        Send
-      </button>
-      <button onClick={startSpeechRecognition}>Speak</button> {/* Speech-to-text button */}
-      <button onClick={speakResponse}>Play Response</button> {/* Text-to-speech button */}
+      <div className={styles.inputContainer}>
+        <input
+          className="input input-bordered input-primary w-full bg-black"
+          type="text"
+          id="userMessage"
+          value={userMessage}
+          onChange={(e) => {
+            setUserMessage(e.target.value);
+          }}
+          placeholder="Type your message here..."
+        />
+        <div className={styles.buttonContainer}>
+          <button className={`btn btn-circle btn-outline btn-primary ${styles.button}`} id="sendButton" onClick={sendMessage} disabled={isSending}>
+            <span className="material-symbols-rounded" style={{ fontSize: '30px' }}>send</span>
+          </button>
+          <button className={`btn btn-circle btn-outline btn-primary ${styles.button}`} onClick={startSpeechRecognition}><span className="material-symbols-rounded" style={{ fontSize: '30px' }}>mic</span></button>
+          <button className={`btn btn-circle btn-outline btn-primary ${styles.button}`} onClick={speakResponse}><span className="material-symbols-rounded" style={{ fontSize: '30px' }}>brand_awareness</span></button>
+        </div>
+      </div>
+      
       <div id="micIndicator" style={{ display: 'none' }}>
         <p>🎤 Microphone is recording...</p>
       </div>
