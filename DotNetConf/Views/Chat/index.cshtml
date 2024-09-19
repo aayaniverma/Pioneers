@@ -38,6 +38,11 @@
     var isSending = false; // To prevent multiple sends
     var chatHistory = []; // Array to store chat history
 
+    function scrollToBottom() {
+        var chatBox = document.getElementById("chatBox");
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
     // Function to send message and get chatbot response
     function sendMessage() {
         if (isSending) return; // Prevent multiple sends
@@ -276,21 +281,27 @@
 
     /* Chat container */
     .chat-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    position: relative; /* Position relative to contain the fixed input container */
-}
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        /* Position relative to contain the fixed input container */
+    }
 
-/* Chatbox - Scrollable area */
-.chat-box {
-    flex: 1;
-    padding: 15px;
-    overflow-y: auto; /* Make the chat box scrollable */
-    border-bottom: 1px solid #444;
-}
+    /* Chatbox - Scrollable area */
+    /* Chatbox - Scrollable area */
+    .chat-box {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        /* Make the chat box scrollable */
+        border-bottom: 1px solid #444;
+        max-height: calc(100vh - 160px);
+        /* Adjust to prevent overflow */
+    }
+
     /* Chatbox for scrolling messages */
-    
+
 
     /* Message styling */
     .message {
@@ -326,16 +337,18 @@
 
     /* Input field and container */
     .input-container {
-    position: fixed; /* Fix the input container at the bottom */
-    bottom: 0;
-    left: 340px; /* Adjust to match the width of the navbar */
-    right: 90px;
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-top: 1px solid #444;
-    background-color: #333;
-}
+        position: fixed;
+        /* Fix the input container at the bottom */
+        bottom: 0;
+        left: 340px;
+        /* Adjust to match the width of the navbar */
+        right: 90px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-top: 1px solid #444;
+        background-color: #333;
+    }
 
     /* Sleek input field */
     .input-field {
