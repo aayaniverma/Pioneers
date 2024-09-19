@@ -16,12 +16,12 @@ To get started, clone the repository to your local machine.
 1. Open your terminal.
 2. Run the following command to clone the repository:
     ```bash
-    git clone https://github.com/your-username/car-troubleshooting-chatbot.git
+    git clone https://github.com/aayaniverma/Pioneers.git
     ```
 
 3. Navigate into the cloned repository:
     ```bash
-    cd car-troubleshooting-chatbot
+    cd Pioneers
     ```
 
 ---
