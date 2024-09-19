@@ -21,13 +21,13 @@ export default function Chatbot() {
           {areButtonsVisible && (  // Only show buttons when visibility flag is true
             <div className="grid grid-cols-2 gap-20">
               <Link href="/fuel">
-                <button className="btn btn-outline btn-primary h-20" style={{ fontSize: '19px' }}>
+                <button className="btn btn-outline btn-accent h-20" style={{ fontSize: '19px' }}>
                   <span className="material-symbols-rounded" style={{ fontSize: '50px' }}>directions_car</span><br />
                   Fuel Car Dashboard Icons
                 </button>
               </Link>
               <Link href="/ev">
-                <button className="btn btn-outline btn-primary h-20" style={{ fontSize: '19px' }}>
+                <button className="btn btn-outline btn-accent h-20" style={{ fontSize: '19px' }}>
                   <span className="material-symbols-rounded" style={{ fontSize: '50px' }}>electric_car</span><br />
                   EV Car Dashboard Icons
                 </button>
